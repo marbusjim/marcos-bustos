@@ -1,0 +1,307 @@
+<!-- NAVBAR -->
+<nav class="navbar" [class.hidden]="navHidden()" [class.scrolled]="lastScroll > 50">
+  <div class="nav-inner">
+    <a class="nav-brand" (click)="scrollTo('#hero')">
+      <span class="brand-text">MB</span>
+      <span class="brand-dot">.</span>
+    </a>
+
+    <ul class="nav-links" [class.open]="menuOpen()">
+      @for (link of navLinks(); track link.href) {
+        <li>
+          <a (click)="scrollTo(link.href)" [class.active]="activeSection() === link.href.replace('#','')">
+            {{ link.label }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="nav-right">
+      <!-- Language switcher -->
+      <div class="lang-switcher">
+        <button (click)="setLang('en')" [class.active]="lang() === 'en'">EN</button>
+        <span class="lang-sep">|</span>
+        <button (click)="setLang('es')" [class.active]="lang() === 'es'">ES</button>
+      </div>
+      <button class="hamburger" (click)="menuOpen.set(!menuOpen())" [class.open]="menuOpen()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="particles">
+    @for (p of particles; track p.id) {
+      <div class="particle"
+        [style.left.%]="p.left" [style.top.%]="p.top"
+        [style.width.px]="p.size" [style.height.px]="p.size"
+        [style.animation-delay.s]="p.delay" [style.animation-duration.s]="p.duration">
+      </div>
+    }
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-content" @fadeInLeft>
+      <p class="hero-greeting">{{ t().hero.greeting }}</p>
+      <h1 class="hero-name">Marcos <span class="accent">Bustos</span></h1>
+      <div class="typewriter-wrap">
+        <span class="typewriter">{{ typewriterText() }}</span><span class="cursor">|</span>
+      </div>
+      <p class="hero-bio">{{ t().hero.bio }}</p>
+      <div class="hero-actions">
+        <button class="btn-primary" (click)="scrollTo('#contact')">{{ t().hero.cta1 }}</button>
+        <button class="btn-outline" (click)="scrollTo('#experience')">{{ t().hero.cta2 }}</button>
+      </div>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/marcos-bustos-209238a9/" target="_blank" class="social-btn" title="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+        <a href="https://github.com/marbusjim" target="_blank" class="social-btn" title="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+        </a>
+        <a href="mailto:marbusjim&#64;gmail.com" class="social-btn" title="Email">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-photo" @scaleIn>
+      <div class="photo-glow"></div>
+      <div class="photo-ring"></div>
+      <img src="profile.jpg" alt="Marcos Bustos Jimenez" />
+    </div>
+  </div>
+
+  <div class="scroll-hint" (click)="scrollTo('#about')">
+    <span>{{ t().hero.scroll }}</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section about">
+  <div class="container">
+    <div class="section-header" [class.visible]="isSectionVisible('about')">
+      <span class="section-tag">{{ t().about.tag }}</span>
+      <h2>{{ t().about.title }} <span class="accent">{{ t().about.titleAccent }}</span></h2>
+    </div>
+
+    <div class="about-grid" [class.visible]="isSectionVisible('about')">
+      <div class="about-bio">
+        <p>{{ t().about.p1 }}</p>
+        <p>{{ t().about.p2 }}</p>
+        <p>{{ t().about.p3 }}</p>
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-icon">📍</span>
+            <div><strong>{{ t().about.location }}</strong><span>{{ t().about.locationVal }}</span></div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">💼</span>
+            <div><strong>{{ t().about.availability }}</strong><span>{{ t().about.availabilityVal }}</span></div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🌐</span>
+            <div><strong>{{ t().about.languages }}</strong><span>{{ t().about.languagesVal }}</span></div>
+          </div>
+          <div class="info-item">
+            <span class="info-icon">🎓</span>
+            <div><strong>{{ t().about.degree }}</strong><span>{{ t().about.degreeVal }}</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        @for (stat of t().stats; track stat.label) {
+          <div class="stat-card">
+            <span class="stat-value">{{ stat.value }}</span>
+            <span class="stat-label">{{ stat.label }}</span>
+          </div>
+        }
+        <div class="lang-card">
+          <h4>{{ t().about.langTitle }}</h4>
+          @for (lvl of t().langLevels; track lvl; let i = $index) {
+            <div class="lang-item">
+              <div class="lang-header">
+                <span>{{ t().about.languagesVal.split(' · ')[i] }}</span>
+                <span class="lang-level">{{ lvl }}</span>
+              </div>
+              <div class="lang-bar">
+                <div class="lang-fill" [style.width.%]="isSectionVisible('about') ? languagesPct[i] : 0"></div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="section skills">
+  <div class="container">
+    <div class="section-header" [class.visible]="isSectionVisible('skills')">
+      <span class="section-tag">{{ t().skills.tag }}</span>
+      <h2>{{ t().skills.title }} <span class="accent">{{ t().skills.titleAccent }}</span></h2>
+    </div>
+    <div class="skills-grid" [class.visible]="isSectionVisible('skills')">
+      @for (cat of t().skillCategories; track cat; let i = $index) {
+        <div class="skill-card">
+          <div class="skill-header">
+            <span class="skill-icon">{{ skillIcons[i] }}</span>
+            <h3>{{ cat }}</h3>
+          </div>
+          <div class="tags">
+            @for (tag of skillTags[i]; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="section experience">
+  <div class="container">
+    <div class="section-header" [class.visible]="isSectionVisible('experience')">
+      <span class="section-tag">{{ t().experience.tag }}</span>
+      <h2>{{ t().experience.title }} <span class="accent">{{ t().experience.titleAccent }}</span></h2>
+    </div>
+    <div class="timeline" [class.visible]="isSectionVisible('experience')">
+      @for (exp of experiences; track exp.company; let ei = $index) {
+        <div class="timeline-item" [style.animation-delay.ms]="ei * 150">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-header">
+              <div>
+                <h3>{{ exp.company }}</h3>
+                <span class="timeline-meta">{{ t().expPeriods[ei] }} · {{ exp.location }}</span>
+              </div>
+            </div>
+            @for (ri of exp.roleIndices; track ri) {
+              <div class="role-block">
+                <div class="role-title-row">
+                  <h4>{{ t().roles[ri].title }}</h4>
+                  <span class="role-period">{{ t().roles[ri].period }}</span>
+                </div>
+                <ul>
+                  @for (a of t().roles[ri].achievements; track a) {
+                    <li>{{ a }}</li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="section education">
+  <div class="container">
+    <div class="section-header" [class.visible]="isSectionVisible('education')">
+      <span class="section-tag">{{ t().education.tag }}</span>
+      <h2>{{ t().education.title }} <span class="accent">{{ t().education.titleAccent }}</span></h2>
+    </div>
+    <div class="edu-grid" [class.visible]="isSectionVisible('education')">
+      @for (item of education; track item.institution; let i = $index) {
+        <div class="edu-card" [class.degree]="item.type === 'degree'">
+          <div class="edu-icon">{{ item.type === 'degree' ? '🎓' : '📜' }}</div>
+          <div class="edu-content">
+            <h3>{{ t().eduTitles[i] }}</h3>
+            <span class="edu-institution">{{ item.institution }}</span>
+            @if (item.location) { <span class="edu-meta">{{ item.location }}</span> }
+            @if (item.year)     { <span class="edu-year">{{ item.year }}</span> }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section contact">
+  <div class="container">
+    <div class="section-header" [class.visible]="isSectionVisible('contact')">
+      <span class="section-tag">{{ t().contact.tag }}</span>
+      <h2>{{ t().contact.title }} <span class="accent">{{ t().contact.titleAccent }}</span></h2>
+      <p class="section-subtitle">{{ t().contact.subtitle }}</p>
+    </div>
+    <div class="contact-grid" [class.visible]="isSectionVisible('contact')">
+      <div class="contact-info">
+        <div class="contact-card">
+          <span class="contact-icon">✉️</span>
+          <div>
+            <strong>{{ t().contact.emailLabel }}</strong>
+            <a href="mailto:marbusjim&#64;gmail.com">marbusjim&#64;gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <span class="contact-icon">📍</span>
+          <div><strong>{{ t().contact.locationLabel }}</strong><span>{{ t().contact.locationVal }}</span></div>
+        </div>
+        <div class="contact-card">
+          <span class="contact-icon">💼</span>
+          <div>
+            <strong>{{ t().contact.linkedinLabel }}</strong>
+            <a href="https://www.linkedin.com/in/marcos-bustos-209238a9/" target="_blank">linkedin.com/in/marcos-bustos</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <span class="contact-icon">💻</span>
+          <div>
+            <strong>{{ t().contact.githubLabel }}</strong>
+            <a href="https://github.com/marbusjim" target="_blank">github.com/marbusjim</a>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <label>{{ t().contact.formName }}</label>
+          <input type="text" [placeholder]="t().contact.formNamePh" required
+            [value]="contactForm().name"
+            (input)="updateForm('name', $any($event.target).value)">
+        </div>
+        <div class="form-group">
+          <label>{{ t().contact.formEmail }}</label>
+          <input type="email" [placeholder]="t().contact.formEmailPh" required
+            [value]="contactForm().email"
+            (input)="updateForm('email', $any($event.target).value)">
+        </div>
+        <div class="form-group">
+          <label>{{ t().contact.formMessage }}</label>
+          <textarea rows="5" [placeholder]="t().contact.formMessagePh"
+            [value]="contactForm().message"
+            (input)="updateForm('message', $any($event.target).value)"></textarea>
+        </div>
+        <button type="submit" class="btn-primary full-width">{{ t().contact.formSubmit }}</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>{{ t().footer }}</p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/marcos-bustos-209238a9/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/marbusjim" target="_blank">GitHub</a>
+      <a href="mailto:marbusjim&#64;gmail.com">Email</a>
+    </div>
+  </div>
+</footer>

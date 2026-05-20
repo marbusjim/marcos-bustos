@@ -1,0 +1,51 @@
+# Angular
+dist/
+.angular/
+out-tsc/
+*.apk
+*.ipa
+*.zip
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+.env.local
+.env.*.local
+
+# Build
+build/
+dist/
+tmp/
+out/
+
+# Logs
+logs/
+*.log
+lerna-debug.log
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.cache/
+*.bak
