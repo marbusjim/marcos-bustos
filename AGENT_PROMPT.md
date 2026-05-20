@@ -105,19 +105,19 @@ Genera los archivos completos:
 4. `src/styles.scss` - Variables CSS globales y reset
 5. `src/index.html` - Con Google Fonts y meta tags
 6. `package.json` - Dependencias necesarias
-7. `angular.json` - Configuración del proyecto con baseHref `/marcos-bustos-dev/`
+7. `angular.json` - Configuración del proyecto con baseHref `/marcos-bustos/`
 8. `.github/workflows/deploy.yml` - Workflow de GitHub Actions para deploy a GitHub Pages
 9. `public/404.html` - Redirect para SPA routing en GitHub Pages
 
 ### Repositorio GitHub:
-- Nombre: `marcos-bustos-dev`
+- Nombre: `marcos-bustos`
 - Usuario: `marbusjim`
-- URL final: `https://marbusjim.github.io/marcos-bustos-dev/`
+- URL final: `https://marbusjim.github.io/marcos-bustos/`
 
 ### Configuración en GitHub:
 - Settings → Pages → Source: GitHub Actions
-- El baseHref en angular.json debe ser `/marcos-bustos-dev/`
-- El path del artifact en el workflow debe apuntar a `dist/marcos-bustos-dev/browser`
+- El baseHref en angular.json debe ser `/marcos-bustos/`
+- El path del artifact en el workflow debe apuntar a `dist/marcos-bustos/browser`
 
 ---
 
@@ -156,5 +156,5 @@ npx ng build --configuration production
 
 # El sitio queda en:
 # http://localhost:4200 (dev)
-# https://marbusjim.github.io/marcos-bustos-dev/ (producción)
+# https://marbusjim.github.io/marcos-bustos/ (producción)
 ```
